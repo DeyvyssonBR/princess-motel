@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Suíte Master 14 — Princess Motel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: oklch(14% 0.015 30); --bg-2: oklch(10% 0.012 30);
+    --surface: oklch(20% 0.020 35); --surface-2: oklch(24% 0.022 38);
+    --fg: oklch(96% 0.012 80); --muted: oklch(68% 0.025 60); --muted-2: oklch(55% 0.020 55);
+    --border: oklch(32% 0.025 50); --accent: oklch(78% 0.14 75); --rose: oklch(55% 0.18 25);
+    --font-script:"Allura",cursive; --font-display:"Cormorant Garamond",Georgia,serif;
+    --font-body:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1240px,92vw);margin:0 auto}
+  .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);font-weight:500}
+  .script{font-family:var(--font-script);color:var(--accent);font-style:italic;font-weight:400}
+
+  /* nav */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:22px 0;backdrop-filter:blur(14px);background:linear-gradient(180deg,oklch(10% 0.012 30 / .82),oklch(10% 0.012 30 / .55) 70%,transparent);border-bottom:1px solid oklch(32% 0.025 50 / .35)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  .brandmark{display:flex;align-items:baseline;gap:8px}
+  .brandmark .l{font-family:var(--font-display);font-size:22px;letter-spacing:.32em;text-transform:uppercase}
+  .brandmark .s{font-family:var(--font-script);font-size:26px;color:var(--accent);line-height:.8;transform:translateY(2px)}
+  .nav-links{display:flex;gap:30px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;background:var(--accent);color:oklch(18% 0.02 35);font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600}
+  .nav-cta svg{width:14px;height:14px}
+  @media (max-width:860px){.nav-links{display:none}}
+
+  /* breadcrumb */
+  .crumb{padding:120px 0 30px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-2)}
+  .crumb a:hover{color:var(--accent)}
+  .crumb span{color:var(--accent);margin:0 12px}
+
+  /* hero suite */
+  .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;padding-bottom:100px;position:relative}
+  @media (max-width:980px){.hero{grid-template-columns:1fr;gap:40px}}
+  .hero-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:
+    radial-gradient(circle at 50% 30%, oklch(60% 0.22 300 / .55), transparent 55%),
+    radial-gradient(circle at 30% 80%, oklch(55% 0.20 280 / .4), transparent 50%),
+    linear-gradient(135deg, oklch(28% 0.08 300), oklch(12% 0.02 290))}
+  .hero-img::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center, transparent 25%, oklch(8% 0.01 30 / .6) 95%)}
+  .hero-img .tag{position:absolute;top:20px;left:20px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--fg);background:oklch(10% 0.012 30 / .7);padding:8px 14px;backdrop-filter:blur(6px);border:1px solid oklch(78% 0.14 75 / .3);z-index:2}
+  .hero-img .badge{position:absolute;bottom:24px;left:24px;z-index:2}
+  .hero-img .badge .l{display:block;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .hero-img .badge .v{font-family:var(--font-display);font-size:42px;color:var(--accent)}
+
+  .hero-text .eyebrow{margin-bottom:18px;display:block}
+  .hero-text h1{font-family:var(--font-display);font-weight:300;font-size:clamp(54px,7vw,86px);line-height:.98;letter-spacing:-.01em;margin-bottom:8px}
+  .hero-text h1 .script{display:block;font-size:1.15em;line-height:.75;margin-bottom:-6px}
+  .hero-text .lead{font-family:var(--font-display);font-style:italic;font-size:19px;color:var(--muted);margin:28px 0 36px;line-height:1.6;max-width:520px}
+  .hero-text .meta{display:flex;gap:36px;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:32px;flex-wrap:wrap}
+  .hero-text .meta div .v{font-family:var(--font-display);font-size:24px;color:var(--accent)}
+  .hero-text .meta div .l{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-2);display:block;margin-top:4px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;transition:all .25s;border:none;cursor:pointer}
+  .btn-primary{background:var(--accent);color:oklch(18% 0.02 35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px oklch(78% 0.14 75 / .3)}
+  .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn svg{width:14px;height:14px}
+
+  /* sec */
+  section{padding:100px 0;position:relative}
+  .sec-head{margin-bottom:60px}
+  .sec-head .eyebrow{display:block;margin-bottom:14px}
+  .sec-head h2{font-family:var(--font-display);font-weight:300;font-size:clamp(36px,4.5vw,56px);line-height:1.05;max-width:680px}
+
+  /* amenities */
+  .amen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
+  @media (max-width:780px){.amen-grid{grid-template-columns:1fr}}
+  .amen{padding:36px 30px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .3s}
+  .amen:nth-child(3n){border-right:none}
+  @media (max-width:780px){.amen{border-right:none}}
+  .amen:hover{background:oklch(20% 0.020 35 / .4)}
+  .amen svg{width:28px;height:28px;color:var(--accent);margin-bottom:18px;stroke-width:1.2}
+  .amen h5{font-family:var(--font-display);font-weight:400;font-size:22px;margin-bottom:6px}
+  .amen p{color:var(--muted);font-size:14px;line-height:1.6}
+
+  /* gallery */
+  .gall{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:10px}
+  @media (max-width:780px){.gall{grid-template-columns:repeat(2,1fr)}}
+  .hero-img img.photo,.gtile img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .gtile{position:relative;overflow:hidden;background:var(--surface)}
+  .gtile img.photo{transition:transform .5s}
+  .gtile:hover img.photo{transform:scale(1.06)}
+  .gtile::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center, transparent 40%, oklch(8% 0.01 30 / .5) 100%)}
+  .g1{grid-column:span 2;grid-row:span 2;background:radial-gradient(circle at 50% 40%, oklch(60% 0.22 300 / .55), transparent 55%),linear-gradient(135deg, oklch(28% 0.08 300), oklch(12% 0.02 290))}
+  .g2{background:radial-gradient(circle at 50% 50%, oklch(55% 0.20 280 / .4), transparent 65%),linear-gradient(140deg, oklch(22% 0.06 300), oklch(13% 0.02 290))}
+  .g3{background:radial-gradient(circle at 40% 60%, oklch(62% 0.18 320 / .42), transparent 60%),linear-gradient(150deg, oklch(22% 0.05 320), oklch(12% 0.02 300))}
+  .g4{grid-column:span 2;background:radial-gradient(circle at 60% 40%, oklch(58% 0.20 290 / .45), transparent 55%),linear-gradient(135deg, oklch(26% 0.07 300), oklch(13% 0.02 290))}
+  .g5{background:radial-gradient(circle at 50% 50%, oklch(55% 0.16 300 / .4), transparent 65%),linear-gradient(145deg, oklch(20% 0.05 300), oklch(12% 0.02 290))}
+  .g6{background:radial-gradient(circle at 40% 50%, oklch(60% 0.18 310 / .4), transparent 60%),linear-gradient(155deg, oklch(22% 0.05 310), oklch(13% 0.02 300))}
+
+  /* price banner */
+  .price-banner{background:linear-gradient(180deg, oklch(11% 0.012 30), var(--bg));padding:80px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .price-flex{display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+  .price-flex .left h3{font-family:var(--font-display);font-weight:300;font-size:42px;line-height:1.05}
+  .price-flex .left h3 .script{font-size:1.1em;display:inline}
+  .price-flex .left p{color:var(--muted);margin-top:8px;font-style:italic;font-family:var(--font-display);font-size:17px}
+  .price-table{display:flex;gap:36px;flex-wrap:wrap}
+  .price-table .item{text-align:right}
+  .price-table .item .l{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px}
+  .price-table .item .v{font-family:var(--font-display);font-size:28px;color:var(--accent)}
+  .price-table .item .v small{font-size:13px;color:var(--muted);margin-right:3px}
+
+  /* footer */
+  footer{background:oklch(8% 0.01 30);padding:50px 0;border-top:1px solid var(--border);color:var(--muted-2);font-size:12px;letter-spacing:.16em}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brandmark">
+      <span class="s">Princess</span>
+      <span class="l">Motel</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#suites">Suítes</a>
+      <a href="index.html#precos">Preços</a>
+      <a href="index.html#tour">Tour</a>
+      <a href="index.html#localizacao">Localização</a>
+    </div>
+    <a class="nav-cta" href="https://wa.me/5535992585223" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-3.2-6.4L20 4l-1.4 3.2A8 8 0 0 1 20 12z"/></svg>
+      Reservar
+    </a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb">
+    <a href="index.html">Início</a><span>·</span><a href="index.html#suites">Suítes</a><span>·</span>Master 14
+  </div>
+
+  <section class="hero" style="padding-top:0">
+    <div class="hero-img">
+      <img class="photo" src="mpq3fpq1-WhatsApp-Image-2026-05-28-at-5.43.33-PM-_3_.jpeg" alt="Suíte Master 14 — cama redonda, hidromassagem e iluminação neon" loading="eager">
+      <span class="tag">Premium · Suíte casal</span>
+      <div class="badge"><span class="l">Pernoite a partir de</span><span class="v">R$ 260</span></div>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Suíte Master · Premium</span>
+      <h1><span class="script">master</span>14</h1>
+      <p class="lead">A mais desejada da casa. Cama redonda, hidromassagem para dois e iluminação neon em LED RGB que pinta o quarto da cor da sua noite. Cinematográfica do teto ao chão.</p>
+      <div class="meta">
+        <div><span class="v">Redonda</span><span class="l">Cama de casal</span></div>
+        <div><span class="v">Hidro dupla</span><span class="l">Banheira aquecida</span></div>
+        <div><span class="v">2 pessoas</span><span class="l">Ocupação</span></div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://wa.me/5535992585223?text=Ol%C3%A1%2C%20gostaria%20de%20reservar%20a%20Su%C3%ADte%20Master%2014" target="_blank">Reservar Master 14</a>
+        <a class="btn btn-ghost" href="index.html#suites">Ver outras suítes</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section style="background:var(--bg-2);border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Comodidades</span>
+      <h2>Tudo pensado para o <span class="script">encontro</span></h2>
+    </div>
+    <div class="amen-grid">
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 12h16v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6z"/><path d="M8 12V8a4 4 0 0 1 8 0v4"/><path d="M4 20h16"/></svg>
+        <h5>Hidromassagem dupla</h5><p>Banheira aquecida para duas pessoas, com jatos ajustáveis e iluminação.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+        <h5>Cama redonda</h5><p>Cama redonda de casal no centro do quarto, colchão firme e enxoval limpo.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 3v18M19 3v18M5 8h14M5 14h14"/></svg>
+        <h5>Iluminação neon RGB</h5><p>LED colorido nas paredes e teto, ajustável no controle para criar o clima.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18"/></svg>
+        <h5>Espelho amplo</h5><p>Painel espelhado que amplia o ambiente e reflete a iluminação neon.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 12h10"/></svg>
+        <h5>Smart TV</h5><p>TV de tela grande com canais e streaming para curtir antes ou depois.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20M12 2a14 14 0 0 0 0 20"/></svg>
+        <h5>Ar-condicionado</h5><p>Climatização total da suíte para qualquer estação do ano.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        <h5>Serviço de quarto</h5><p>Bebidas, porções e lanches servidos no quarto pelo interfone, 24h.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0 1 10 0v3"/></svg>
+        <h5>Garagem privativa</h5><p>Vaga individual com cortina, acesso direto à suíte e total discrição.</p>
+      </div>
+      <div class="amen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+        <h5>Atendimento discreto</h5><p>Higiene, privacidade e bem-estar. Pedidos direto pelo interfone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Galeria</span>
+      <h2>Por dentro da <span class="script">Master 14</span></h2>
+    </div>
+    <div class="gall">
+      <div class="gtile g1"><img class="photo" src="mpq3fppl-WhatsApp-Image-2026-05-28-at-5.43.33-PM-_2_.jpeg" alt="Cama redonda com teto espelhado" loading="lazy"></div>
+      <div class="gtile g2"><img class="photo" src="mpq3fpq1-WhatsApp-Image-2026-05-28-at-5.43.33-PM-_3_.jpeg" alt="Iluminação neon roxa" loading="lazy"></div>
+      <div class="gtile g3"><img class="photo" src="mpq3fpom-WhatsApp-Image-2026-05-28-at-5.43.33-PM.jpeg" alt="Hidromassagem dupla" loading="lazy"></div>
+      <div class="gtile g4"><img class="photo" src="mpq3fpqn-WhatsApp-Image-2026-05-28-at-5.43.33-PM-_4_.jpeg" alt="Cadeira e banheira" loading="lazy"></div>
+      <div class="gtile g5"><img class="photo" src="mpq3fpoz-WhatsApp-Image-2026-05-28-at-5.43.33-PM-_1_.jpeg" alt="Vista da suíte com box e ofurô" loading="lazy"></div>
+      <div class="gtile g6"><img class="photo" src="mpq3fppl-WhatsApp-Image-2026-05-28-at-5.43.33-PM-_2_.jpeg" alt="Detalhe da cama redonda" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section class="price-banner">
+  <div class="wrap">
+    <div class="price-flex">
+      <div class="left">
+        <h3>Reserve a <span class="script">Master 14</span></h3>
+        <p>Resposta pelo WhatsApp em poucos minutos.</p>
+      </div>
+      <div class="price-table">
+        <div class="item"><div class="l">1 hora</div><div class="v"><small>R$</small>90</div></div>
+        <div class="item"><div class="l">3 horas</div><div class="v"><small>R$</small>120</div></div>
+        <div class="item"><div class="l">4 horas</div><div class="v"><small>R$</small>180</div></div>
+        <div class="item"><div class="l">5 horas</div><div class="v"><small>R$</small>200</div></div>
+        <div class="item"><div class="l">Pernoite</div><div class="v"><small>R$</small>260</div></div>
+        <a class="btn btn-primary" href="https://wa.me/5535992585223?text=Ol%C3%A1%2C%20quero%20reservar%20a%20Master%2014" target="_blank" style="align-self:center">Reservar agora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 PRINCESS MOTEL · <a href="index.html">VOLTAR AO INÍCIO</a></span>
+    <span>(35) 99258-5223 · BR-491 KM 9 · CAMPO ALEGRE</span>
+  </div>
+</footer>
+
+</body>
+</html>

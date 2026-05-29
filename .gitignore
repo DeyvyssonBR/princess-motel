@@ -1,0 +1,7 @@
+# Áudios internos do dono — NUNCA subir
+*.ogg
+
+# Sistema operacional / editores
+Thumbs.db
+.DS_Store
+desktop.ini
